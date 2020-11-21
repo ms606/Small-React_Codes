@@ -15,6 +15,10 @@ const Basic = () => (
     > 
      <Form>
        <label htmlFor="firstName">First Name</label>
+       <Field id="firstName" name="firstName" placeholder="Muffin"/>
+       <br></br>
+       <label htmlFor="lastName">Last Name</label>
+       <Field id="lastname" name="lastname" placeholder="Amore"/>
      </Form>
 
     </Formik>
