@@ -1,0 +1,99 @@
+import React, {useState} from 'react';
+import DataTable from 'react-data-table-component';
+import ReactDOM from 'react-dom';
+import './index.css';
+import * as XLSX from 'xlsx';
+
+
+function App() {
+	const [columns, setColumns] = useState([]);
+	const [data, setData] = useState([]);
+
+
+	const processData = dataString => {
+	 const dataStringLines = dataString.split(/\r\n|\n/);
+	 const headers = dataStringLines[0].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);	
+
+	 const list = [];
+	 for (let i = 1; i < dataStringLines.length; i++){
+	 	const row = dataStringLines[i].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);	
+	 	const obj ={};
+
+
+	 	obj[headers[i]]  = dataStringLines[i];
+ 		console.log(dataStringLines[i]);
+		list.push(obj);
+
+
+	 	if (Object.values(row).filter(x => x).length > 0){
+	 		//console.log(row);	
+	 		//list.push(row[i]);
+	 	}
+ 		
+	 	//
+	 	
+	 }
+
+
+	// console.log(dataString);
+	// list.push(dataString);
+
+
+	 const columns = headers.map(c => ({
+	 	name: c,
+	 	selector: c,
+	 }))
+	 columns.push(columns);
+	 
+
+	 setData(list);
+	 setColumns(columns);
+
+	}
+
+
+
+
+	const handleFileUpload = e => {
+	  const file = e.target.files[0];
+	  const reader = new FileReader();
+	  reader.onload = (evt) => {
+		/* Parse data */
+ 		const bstr = evt.target.result;
+		const wb = XLSX.read(bstr, {type: 'binary'});  	
+		/* Get first worksheet */ 
+		const wsname = wb.SheetNames[0];
+		const ws = wb.Sheets[wsname];
+		/* Convert array of arrays */ 
+		const data = XLSX.utils.sheet_to_csv(ws, {header: 1});
+		processData(data);
+	  }		  
+	  reader.readAsBinaryString(file);
+	}
+
+	return (
+  	 <div>
+		<h3> Read CSV File in React</h3>
+		<input
+		 type="file"
+		 accept=".csv,.xlsx,.xls"
+		 onChange={handleFileUpload}
+		/> 
+		<DataTable
+		  pagination
+		  highlightOnHover
+		  columns={columns} 	
+		  data={data}
+		/>  
+	 </div>	
+	)
+}
+
+export default App;
+
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+
