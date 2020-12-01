@@ -7,13 +7,13 @@ const Thermometer = ({min, max, current, fillColor, backgroundColor, height, wid
 
 const marginLeft = null; 
 
-				min=0;
-				max=30;
-				width=20;
-				height=300;
-				backgroundColor='blue';
-				fillColor='green';
-				current=10;
+				// min=0;
+				// max=30;
+				// width=20;
+				// height=300;
+				// backgroundColor='blue';
+				// fillColor='green';
+				// current=10;
 
 const style = {
 	backgroundColor: backgroundColor,
@@ -37,7 +37,23 @@ const fillStyle = {
 	zIndex: 1
 }
 
+const bubbleStyle = {
+	backgroundColor: backgroundColor,
+	borderRadius: 100,
+	height: width * 2.5,
+	width: width * 2.5,
+	padding: 1, 
+	position: 'relative',
+	top: -width,
+	right: 15,
+	zIndex: 1
+}
 			
+const bubbleFill = {
+	backgroundColor: fillColor,
+	borderRadius: bubbleBorderRadius,
+	height: bubblePixelsToFill
+}			
 
 
 return (
@@ -56,4 +72,6 @@ ReactDOM.render(
     <Thermometer />,
   document.getElementById('root')
 );
+
+
 
