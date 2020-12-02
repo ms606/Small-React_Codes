@@ -7,8 +7,9 @@ class MyComponent extends React.Component {
 		super(props);
 		this.state = {
 			data: null,
-      status: null,
-      doggoName: ''
+      		status: null,
+          	doggoName: ''
+     
 		};
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,9 +22,8 @@ class MyComponent extends React.Component {
 		.then(
 			(result) => {
 				this.setState({
-					data: this.state.message,
-          status: this.state.status,
-          doggoName: this.state.message
+					data:      result.message,
+          			status:    result.status
         }) //.slice(29,10)
       },
       (error) => {
@@ -35,18 +35,21 @@ class MyComponent extends React.Component {
   }
 
   handleChange(event){
-    this.setState({value: event.target.value});
+    //this.setState({doggoName: event.target.value});
+  //     const doggoName = data.substring(5); 
   }
   
   handleSubmit(event){
+  	console.log(event.target);
     event.preventDefault();
-
+    this.setState({doggoName: {this.state.data}});
+    console.log( event);
   }
 
 	render(){
-    const {data,doggoName} = this.state;
-    console.log(data);
-
+    const {data, doggoName} = this.state;
+     
+	// console.log(doggoName, 'doggoName')
 		return(
       <div>
       <form onSubmit = {this.handleSubmit}>
@@ -58,7 +61,7 @@ class MyComponent extends React.Component {
       </form>
       
         {/* <div> <h1>{data}</h1> </div> */}
-        <div> <h1>{doggoName}</h1> </div>
+         <div> <h1>{this.state.doggoName}</h1> </div>
 
       </div>
 			)
