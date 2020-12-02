@@ -7,33 +7,60 @@ class MyComponent extends React.Component {
 		super(props);
 		this.state = {
 			data: null,
-			status: null
+      status: null,
+      doggoName: ''
 		};
-	}
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+}
 
 	componentDidMount(){
 		fetch("https://dog.ceo/api/breeds/image/random")
 		.then(res => res.json())
 		.then(
-			(result) => 
+			(result) => {
 				this.setState({
-					data: result.message,
-					status: result.status
-				})
+					data: this.state.message,
+          status: this.state.status,
+          doggoName: this.state.message
+        }) //.slice(29,10)
+      },
+      (error) => {
+        this.setState({
+          error
+        });
+      }
 			);
-	}
+  }
+
+  handleChange(event){
+    this.setState({value: event.target.value});
+  }
+  
+  handleSubmit(event){
+    event.preventDefault();
+
+  }
 
 	render(){
-		const {data,success} = this.state;
+    const {data,doggoName} = this.state;
+    console.log(data);
+
 		return(
-			
-			<h1> Guess Which Dog Is This 
+      <div>
+      <form onSubmit = {this.handleSubmit}>
+        <h1> Guess Which Dog Is This</h1>
+        <img src={data} />
+        <br></br>
+        <input type="text" value={this.state.value} onChange={this.handleChange}/>
+        <input type="submit" value="submit"  />
+      </form>
+      
+        {/* <div> <h1>{data}</h1> </div> */}
+        <div> <h1>{doggoName}</h1> </div>
 
-			<div>
-			 <img src={data} />
-			</div>
-
-			</h1>
+      </div>
 			)
 	}
 }
