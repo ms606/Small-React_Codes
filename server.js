@@ -11,9 +11,29 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
 	.then(client => {
 		console.log('Connected to Database');
 		const db = client.db('todo');
-		app.use();
-		app.get();
-		app.post();
+		const todoCollection = db.collection('todo-list');
+		app.set('view engine', ejs);
+
+
+		// All handlers goin here 
+		// app.use();
+		app.get('/', (req,res) => {
+			db.collection('todo-list').find().toArray()
+			  .then(todo => {
+				console.log(todo); 
+				res.render('index.ejs', {todo: todo}) 	
+			  })
+			  .catch(error => console.error(error))	;
+
+		});
+
+		app.post('/todo', (req, res) => {
+		  todoCollection.insertOne(req.body)
+		    .then(result => {
+		      res.redirect('/');
+		    })
+		    .catch(error => console.error(error))
+		})
 		app.listen();
 	})
 	.catch(error => console.log(error));
@@ -22,14 +42,8 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-// All handlers
-app.get('/', (req,res) => {
-	res.sendFile(__dirname + '/index.html');
-});
 
-app.post('/todo', (req, res) => {
-	console.log(req.body);
-});
+
 
 app.listen(3000, function(){
 	console.log('listening to port 3000');
