@@ -4,6 +4,8 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const connectionString = 'mongodb+srv://todo:todo123@cluster-1.00leg.mongodb.net/todo?retryWrites=true&w=majority';
 
+app.set('view engine', 'ejs');
+
 	
 console.log('connecting to Database..');
 
@@ -12,7 +14,6 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
 		console.log('Connected to Database');
 		const db = client.db('todo');
 		const todoCollection = db.collection('todo-list');
-		app.set('view engine', ejs);
 
 
 		// All handlers goin here 
