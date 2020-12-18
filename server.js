@@ -6,7 +6,6 @@ const connectionString = 'mongodb+srv://todo:todo123@cluster-1.00leg.mongodb.net
 
 app.set('view engine', 'ejs');
 
-	
 console.log('connecting to Database..');
 
 MongoClient.connect(connectionString, {useUnifiedTopology: true})
@@ -21,19 +20,19 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
 		app.get('/', (req,res) => {
 			db.collection('todo-list').find().toArray()
 			  .then(todo => {
-				console.log(todo); 
 				res.render('index.ejs', {todo: todo}) 	
 			  })
-			  .catch(error => console.error(error))	;
-
+			  .catch(error => console.error(error));
 		});
 
 		app.post('/todo', (req, res) => {
+			if (req.body != null){
 		  todoCollection.insertOne(req.body)
 		    .then(result => {
 		      res.redirect('/');
 		    })
 		    .catch(error => console.error(error))
+		     }
 		})
 		app.listen();
 	})
@@ -41,9 +40,6 @@ MongoClient.connect(connectionString, {useUnifiedTopology: true})
 
 // Always place body parser before CRUD handlers!!
 app.use(bodyParser.urlencoded({extended: true}));
-
-
-
 
 
 app.listen(3000, function(){
