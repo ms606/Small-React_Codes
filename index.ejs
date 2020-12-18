@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="Web site created using create-react-app"
+  />
 
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
- 
- <form action="/todo" method="POST">
-   <input type="text" name="name" placeholder="Enter To-Do Detail here">
-   <button type="submit">Submit</button>
- </form>
+  <title>React App</title>
+  <meta name="theme-color" content="#000000" />  
+  <title>To-Do App</title>
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+<form action="/todo" method="POST">
+ <input type="text" name="todoName" placeholder="Enter To-Do Detail here">
+ <button type="submit">Submit</button>
+</form>
 
 <!--  <div class="container">
-  <div id="container" class="col-md-8 col-md-offset-2">  </div>
- </div>   -->
-  
+<div id="container" class="col-md-8 col-md-offset-2">  </div>
+</div>   -->
 
+  <ul class="todo">
+    <% for(var i=0; i < todo.length; i++){ %>
+       <li class="todo">
+         <span><%= todo[i].todoName %></span>
+         <span><%= todo[i]._id %></span>
+         <span><%= todo[i] %></span>
+       </li>
+    <% } %>
+  </ul>
 
-  </body>
+</body>
 </html>
