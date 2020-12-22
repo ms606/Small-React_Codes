@@ -9,24 +9,24 @@ import AddIcon from "@material-ui/icons/Add";
 import WeatherCard from "./weatherCard";
 
 const useStyles = makeStyles(() => ({
-	root: {
-		flexGrow: 1,
-		display: "flex",
-		flexDirection: "column",
-		height: "100vh",
-		overflow: "hidden",
-	}, 
-	containerGrid: {
-		flex: 1,
-		overflowY: "auto",
-		padding: "2em",
-	},
+	 root: {
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        overflow: "hidden",
+    },
+	 containerGrid: {
+        flex: 1,
+        overflowY: "auto",
+        padding: "2em",
+    },
 	addButton: {
-		position: "absolute",
-		margin: "1em",
-		right: 0,
-		botton: 0,
-	},
+        position: "absolute",
+        margin: "1em",
+        right: 0,
+        bottom: 0,
+    },
 }));
 
 const LOCAL_STORAGE_KEY = "locations";
@@ -69,25 +69,26 @@ function App(){
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<Grid container spacing={3} className={classes.containerGrid}>
-				{weatherLocations.map((location, index) => (
-					<Grid key={location} xs={12} sm={6} md={4} lg={3} item>
-						<WeatherCard
-							location={location}
-							canDelete={!location || canAddOrRemove}
-							onDelete={removeAtIndex(index)}
-							onUpdate={updateAtIndex(index)}
-						/>
-                     </Grid>   
+            <Grid container spacing={3} className={classes.containerGrid}>
+                {weatherLocations.map((location, index) => (
+                    <Grid key={location} xs={12} sm={6} md={4} lg={3} item>
+                        <WeatherCard
+                            location={location}
+                            canDelete={!location || canAddOrRemove}
+                            onDelete={removeAtIndex(index)}
+                            onUpdate={updateAtIndex(index)}
+                        />
+                    </Grid>  
 					))}				
 			</Grid>
 
-			<Fab 
-				onClick={handleAddClick}
-				aria-label="add weather location"
-				className={classes.addButton}
-				color="secondary"
-				disabled={!canAddOrRemove}> 
+			<Fab
+                onClick={handleAddClick}
+                aria-label="add weather location"
+                className={classes.addButton}
+                color="secondary"
+                disabled={!canAddOrRemove}
+            >
 				<AddIcon />
 			</Fab>	
 		</div>

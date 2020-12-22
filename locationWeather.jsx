@@ -47,6 +47,8 @@ function ErrorMessage({ apiError }) {
         </>
     );
 }
+
+
 function WeatherDisplay({ weatherData }) {
     const classes = useStyles();
     const { temp, description, icon, windTransform, windSpeed } = React.useMemo(() => {
@@ -78,6 +80,9 @@ function WeatherDisplay({ weatherData }) {
         </>
     );
 }
+
+
+
 function LocationWeather({ location }) {
     const classes = useStyles();
     const [weatherData, setWeatherData] = React.useState({});
@@ -117,7 +122,9 @@ function LocationWeather({ location }) {
         </>
     );
 }
+
 LocationWeather.propTypes = {
     location: PropTypes.string.isRequired,
 };
+
 export default LocationWeather;
