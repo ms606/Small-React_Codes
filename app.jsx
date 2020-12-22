@@ -58,7 +58,7 @@ function App(){
 			weatherLocations.map((location, locationIndex) => (locationIndex === index ? updateLocation : location)),
 			);
 
-	const canAddOrRemove = React.useMemo(() => weatherLocations.every(location => location))	
+	const canAddOrRemove = React.useMemo(() => weatherLocations.every(location => location !== ""), [weatherLocations]);
 
 	return(
 		<div className={classes.root}>
@@ -72,12 +72,13 @@ function App(){
 			<Grid container spacing={3} className={classes.containerGrid}>
 				{weatherLocations.map((location, index) => (
 					<Grid key={location} xs={12} sm={6} md={4} lg={3} item>
-						<weatherCard
+						<WeatherCard
 							location={location}
 							canDelete={!location || canAddOrRemove}
 							onDelete={removeAtIndex(index)}
 							onUpdate={updateAtIndex(index)}
 						/>
+                     </Grid>   
 					))}				
 			</Grid>
 
@@ -92,5 +93,4 @@ function App(){
 		</div>
 	);
 }
-
 export default App;
