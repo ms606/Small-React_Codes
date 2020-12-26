@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import StepTracker from './stepTracker';
 import reportWebVitals from './reportWebVitals';
+import UseStateArray from './useStateArray';
+import LoginForm from './LoginForm';
 
 function LessText({text, maxLength}) {
   const [hidden, setHidden] = useState(true);
@@ -36,10 +38,21 @@ function LessText({text, maxLength}) {
 // );
 
 
+// ReactDOM.render(
+//   <StepTracker />,
+//   document.getElementById('root')
+// );
+
+// ReactDOM.render(
+// 	 <UseStateArray />,
+// 	 document.getElementById('root')
+// 	);
+
 ReactDOM.render(
-  <StepTracker />,
+  <LoginForm />,
   document.getElementById('root')
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
