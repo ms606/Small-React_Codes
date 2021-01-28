@@ -1,19 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
 
 class App extends Component {
   constructor(){
     super();
-
+    this.state = { heading: 'This is a button',
+                   casde: 'Hello' };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(){
-    return {buttonText: "Thank you for pressing me"};
-  }
+    this.setState (() => {
+      return (
+      {heading: "You pressed me.",
+       casde: "Heading"}
+    )}
+    )
+}
 
   render(){
-    return <button onClick={this.handleClick}>buttonText</button>
+    const { heading } = this.state;
+    const { casde } = this.state;
+
+    console.log(heading,casde);    
+
+    return(
+      <div>
+       <button onClick={this.handleClick}>{heading}</button>
+       <button onMouseEnter={this.handleClick}>{casde}</button>
+      </div>
+    )
+
   }
 
 }

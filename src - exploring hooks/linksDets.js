@@ -1,0 +1,1 @@
+export const linksDets = `1, A`
